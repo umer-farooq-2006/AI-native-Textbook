@@ -1,8 +1,9 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useEffect, useRef } from 'react';
 import RAGChatbotUI from './RAGChatbotUI';
 
 const FloatingChatbot = forwardRef((_, ref) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const chatbotRef = useRef<HTMLDivElement>(null);
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
@@ -16,6 +17,27 @@ const FloatingChatbot = forwardRef((_, ref) => {
     setIsOpen(false);
   };
 
+  // Close chatbot when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (chatbotRef.current && !chatbotRef.current.contains(event.target as Node)) {
+        if (isOpen) {
+          closeChatbot();
+        }
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
   useImperativeHandle(ref, () => ({
     toggleChatbot,
     openChatbot,
@@ -24,8 +46,26 @@ const FloatingChatbot = forwardRef((_, ref) => {
   }));
 
   return (
-    <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 1000 }}>
-      {isOpen ? (
+    <div
+      ref={chatbotRef}
+      style={{
+        position: 'fixed',
+        bottom: '24px',
+        right: '24px',
+        zIndex: 1000,
+        pointerEvents: 'none' // Allow clicks to pass through when chatbot is not the target
+      }}
+    >
+      <div
+        style={{
+          opacity: isOpen ? 1 : 0,
+          transform: isOpen ? 'scale(1) translateY(0)' : 'scale(0.8) translateY(20px)',
+          transition: 'opacity 0.3s ease, transform 0.3s ease',
+          visibility: isOpen ? 'visible' as const : 'hidden' as const,
+          pointerEvents: isOpen ? 'auto' as const : 'none' as const, // Only allow interactions when open
+          position: 'relative'
+        }}
+      >
         <div style={{ position: 'relative', marginBottom: '16px' }}>
           <RAGChatbotUI />
           <button
@@ -54,7 +94,19 @@ const FloatingChatbot = forwardRef((_, ref) => {
             ×
           </button>
         </div>
-      ) : (
+      </div>
+      <div
+        style={{
+          opacity: isOpen ? 0 : 1,
+          transform: isOpen ? 'scale(0.8) translateY(-20px)' : 'scale(1) translateY(0)',
+          transition: 'opacity 0.3s ease, transform 0.3s ease',
+          visibility: isOpen ? 'hidden' as const : 'visible' as const,
+          pointerEvents: isOpen ? 'none' as const : 'auto' as const, // Only allow interactions when closed
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+        }}
+      >
         <button
           onClick={toggleChatbot}
           style={{
@@ -77,7 +129,7 @@ const FloatingChatbot = forwardRef((_, ref) => {
         >
           💬
         </button>
-      )}
+      </div>
     </div>
   );
 });
