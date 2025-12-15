@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -29,7 +29,18 @@ function HomepageHeader() {
   );
 }
 
-function FeatureSection() {
+function FeatureSection({ chatbotRef }) {
+  const handleAIAssistantClick = () => {
+    if (chatbotRef && chatbotRef.current) {
+      chatbotRef.current.openChatbot();
+    }
+  };
+
+  const handleInteractiveLearningClick = () => {
+    // Navigate to the textbook experience (same as the CTA button)
+    window.location.href = '/docs/intro';
+  };
+
   return (
     <section className={styles.features}>
       <div className="container">
@@ -44,7 +55,18 @@ function FeatureSection() {
 
         <div className="row" style={{ alignItems: 'stretch', justifyContent: 'center', gap: '2rem' }}>
           <div className="col col--4">
-            <div className={styles.featureCard}>
+            <div
+              className={styles.featureCard}
+              onClick={handleInteractiveLearningClick}
+              style={{ cursor: 'pointer' }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleInteractiveLearningClick();
+                }
+              }}
+            >
               <div className={styles.featureIcon}>
                 🤖
               </div>
@@ -58,7 +80,18 @@ function FeatureSection() {
           </div>
 
           <div className="col col--4">
-            <div className={styles.featureCard}>
+            <div
+              className={styles.featureCard}
+              onClick={handleAIAssistantClick}
+              style={{ cursor: 'pointer' }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleAIAssistantClick();
+                }
+              }}
+            >
               <div className={styles.featureIcon}>
                 💡
               </div>
@@ -78,15 +111,17 @@ function FeatureSection() {
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
+  const chatbotRef = useRef();
+
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
       <main>
-        <FeatureSection />
+        <FeatureSection chatbotRef={chatbotRef} />
       </main>
-      <FloatingChatbot />
+      <FloatingChatbot ref={chatbotRef} />
     </Layout>
   );
 }

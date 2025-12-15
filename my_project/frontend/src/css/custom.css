@@ -50,6 +50,20 @@
   --ifm-button-border-radius: 8px;
 }
 
+/* Footer link styling for better readability */
+.footer--dark {
+  --ifm-footer-link-color: var(--ifm-color-gray-300);
+  --ifm-footer-title-color: var(--ifm-color-gray-100);
+}
+
+.footer__link-item {
+  color: var(--ifm-color-gray-300);
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary-light);
+}
+
 /* Animations */
 @keyframes pulse {
   0% {

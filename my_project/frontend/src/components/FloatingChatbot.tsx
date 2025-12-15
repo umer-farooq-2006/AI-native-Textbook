@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import RAGChatbotUI from './RAGChatbotUI';
 
-const FloatingChatbot: React.FC = () => {
+const FloatingChatbot = forwardRef((_, ref) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
   };
+
+  const openChatbot = () => {
+    setIsOpen(true);
+  };
+
+  const closeChatbot = () => {
+    setIsOpen(false);
+  };
+
+  useImperativeHandle(ref, () => ({
+    toggleChatbot,
+    openChatbot,
+    closeChatbot,
+    isChatbotOpen: isOpen
+  }));
 
   return (
     <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 1000 }}>
@@ -65,6 +80,8 @@ const FloatingChatbot: React.FC = () => {
       )}
     </div>
   );
-};
+});
+
+FloatingChatbot.displayName = 'FloatingChatbot';
 
 export default FloatingChatbot;
