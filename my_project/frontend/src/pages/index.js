@@ -4,10 +4,11 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
-import RAGChatbotUI from '@site/src/components/RAGChatbotUI';
-import InteractiveExample from '@site/src/components/InteractiveExample';
-import SafeAuthComponent from '@site/src/components/SafeAuthComponent';
-import SafePersonalizationSettings from '@site/src/components/SafePersonalizationSettings';
+// import RAGChatbotUI from '@site/src/components/RAGChatbotUI';
+// import InteractiveExample from '@site/src/components/InteractiveExample';
+// import SafeAuthComponent from '@site/src/components/SafeAuthComponent';
+// import SafePersonalizationSettings from '@site/src/components/SafePersonalizationSettings';
+import FloatingChatbot from '@site/src/components/FloatingChatbot';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -35,28 +36,25 @@ function FeatureSection() {
         <div className="row">
           <div className="col col--4">
             <div className="text--center padding-horiz--md">
-              <h2>Interactive Learning</h2>
-              <p>Engage with hands-on examples for ROS 2, Gazebo & Unity, NVIDIA Isaac, and VLA+GPT.</p>
-              <InteractiveExample
+              {/* <h2>Interactive Learning</h2>
+              <p>Engage with hands-on examples for ROS 2, Gazebo & Unity, NVIDIA Isaac, and VLA+GPT.</p> */}
+              {/* <InteractiveExample
                 component="ROS 2"
                 title="Try it yourself!"
                 description="Interactive example of publisher/subscriber pattern in ROS 2"
-              />
+              /> */}
             </div>
           </div>
           <div className="col col--4">
             <div className="text--center padding-horiz--md">
-              <h2>AI Assistant</h2>
-              <p>Get answers to your questions about Physical AI & Humanoid Robotics.</p>
-              <RAGChatbotUI />
             </div>
           </div>
           <div className="col col--4">
             <div className="text--center padding-horiz--md">
-              <h2>Personalized Experience</h2>
-              <p>Customize your learning experience with personalization and translation features.</p>
-              <SafeAuthComponent />
-              <SafePersonalizationSettings />
+              {/* <h2>Personalized Experience</h2>
+              <p>Customize your learning experience with personalization and translation features.</p> */}
+              {/* <SafeAuthComponent />
+              <SafePersonalizationSettings /> */}
             </div>
           </div>
         </div>
@@ -75,6 +73,7 @@ export default function Home() {
       <main>
         <FeatureSection />
       </main>
+      <FloatingChatbot />
     </Layout>
   );
 }
