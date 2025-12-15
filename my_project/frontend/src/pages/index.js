@@ -19,7 +19,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
+            className={clsx('button', styles.ctaButton)}
             to="/docs/intro">
             Start Learning - 5min ⏱️
           </Link>
@@ -33,28 +33,41 @@ function FeatureSection() {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <div className="text--center">
+          <h2 className={styles.sectionTitle}>
+            Learn Physical AI & Humanoid Robotics
+          </h2>
+          <p className={styles.sectionSubtitle}>
+            Explore cutting-edge concepts in robotics, AI, and autonomous systems
+          </p>
+        </div>
+
+        <div className="row" style={{ alignItems: 'stretch', justifyContent: 'center', gap: '2rem' }}>
           <div className="col col--4">
-            <div className="text--center padding-horiz--md">
-              {/* <h2>Interactive Learning</h2>
-              <p>Engage with hands-on examples for ROS 2, Gazebo & Unity, NVIDIA Isaac, and VLA+GPT.</p> */}
-              {/* <InteractiveExample
-                component="ROS 2"
-                title="Try it yourself!"
-                description="Interactive example of publisher/subscriber pattern in ROS 2"
-              /> */}
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>
+                🤖
+              </div>
+              <h3 className={styles.featureTitle}>
+                Interactive Learning
+              </h3>
+              <p className={styles.featureDescription}>
+                Engage with hands-on examples for ROS 2, Gazebo & Unity, NVIDIA Isaac, and VLA+GPT.
+              </p>
             </div>
           </div>
+
           <div className="col col--4">
-            <div className="text--center padding-horiz--md">
-            </div>
-          </div>
-          <div className="col col--4">
-            <div className="text--center padding-horiz--md">
-              {/* <h2>Personalized Experience</h2>
-              <p>Customize your learning experience with personalization and translation features.</p> */}
-              {/* <SafeAuthComponent />
-              <SafePersonalizationSettings /> */}
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>
+                💡
+              </div>
+              <h3 className={styles.featureTitle}>
+                AI Assistant
+              </h3>
+              <p className={styles.featureDescription}>
+                Get answers to your questions about Physical AI & Humanoid Robotics.
+              </p>
             </div>
           </div>
         </div>
