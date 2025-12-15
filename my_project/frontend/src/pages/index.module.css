@@ -72,6 +72,20 @@
   opacity: 1;
 }
 
+/* Dark mode hero section - font color to black for better readability */
+[data-theme='dark'] .heroBanner {
+  color: #000000;
+}
+
+[data-theme='dark'] .heroBanner .hero__title {
+  color: #000000;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme='dark'] .heroBanner .hero__subtitle {
+  color: #000000;
+}
+
 .featureCard:hover .featureIcon {
   transform: scale(1.1);
 }

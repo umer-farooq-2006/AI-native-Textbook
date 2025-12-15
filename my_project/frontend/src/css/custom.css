@@ -109,6 +109,29 @@
   --ifm-card-shadow: var(--ifm-global-shadow);
 }
 
+/* Dark theme footer - all text to white for better visibility */
+[data-theme='dark'] .footer {
+  --ifm-footer-color: #ffffff;
+  --ifm-footer-link-color: #ffffff;
+  --ifm-footer-title-color: #ffffff;
+}
+
+[data-theme='dark'] .footer__title {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .footer__link-item {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .footer__item {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .footer__copyright {
+  color: #ffffff;
+}
+
 [data-theme='dark'] {
   @keyframes pulse {
     0% {
